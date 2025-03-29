@@ -71,7 +71,7 @@ export function generateTransactionData() {
     "Samsung Galaxy S22",
   ]
 
-  return Array.from({ length: 5 }).map((_, i) => ({
+  return Array.from({ length: 5 }).map(() => ({
     id: faker.string.numeric(7),
     product: faker.helpers.arrayElement(products),
     customer: faker.person.fullName(),
