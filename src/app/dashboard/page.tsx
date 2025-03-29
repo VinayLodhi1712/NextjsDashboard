@@ -12,9 +12,10 @@ import TrafficChartCard from "./components/TrafficChartCard";
 import LatestTransactions from "./components/TransactionTable";
 import { generateSalesData, generateRevenueData } from "./data/data";
 import {
-  LineChartComponent,
+  SingleLineChart,
   BarChartComponent,
   AreaChartComponent,
+  MultiLineChart,
 } from "./components/charts";
 
 export default function DashboardPage() {
@@ -108,7 +109,7 @@ export default function DashboardPage() {
               bgColor="bg-blue-600"
               data={salesData.users}
               ChartComponent={(props) => (
-                <LineChartComponent
+                <SingleLineChart
                   {...props}
                   data={props.data?.map((item) => ({
                     ...item,
@@ -124,7 +125,7 @@ export default function DashboardPage() {
               trend="up"
               bgColor="bg-teal-500"
               data={salesData.income}
-              ChartComponent={LineChartComponent}
+              ChartComponent={SingleLineChart}
             />
             <AnalyticsCard
               title="Conversion Rate"
@@ -133,7 +134,7 @@ export default function DashboardPage() {
               trend="up"
               bgColor="bg-yellow-500"
               data={salesData.conversion}
-              ChartComponent={LineChartComponent}
+              ChartComponent={SingleLineChart}
             />
             <AnalyticsCard
               title="Sessions"
@@ -192,9 +193,9 @@ export default function DashboardPage() {
               title="Traffic & Sales"
               description="January - July 2021"
               data={trafficMetrics}
-              trafficData={salesData.traffic}
+              trafficData={salesData.traffic.map(({ name, ...rest }) => ({ name, ...rest }))}
               daysData={daysData}
-              ChartComponent={LineChartComponent}
+              ChartComponent={MultiLineChart}
             />
           </div>
 

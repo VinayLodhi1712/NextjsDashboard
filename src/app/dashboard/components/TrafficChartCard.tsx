@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -13,10 +13,16 @@ interface TrafficChartCardProps {
     value: number;
     color: string;
   }[];
-  trafficData: { x: string | number; y: number }[];
+  trafficData: { name: string; value1: number; value2: number; value3: number }[]; // Accepts existing structure
   daysData: { day: string; percentage1: number; percentage2: number }[];
-  ChartComponent: React.FC<{ data: { x: string | number; y: number }[]; multiLine: boolean; showGrid: boolean; colors: string[] }>;
+  ChartComponent: React.FC<{
+    data: { name: string; value1: number; value2: number; value3: number }[]; // Passes same structure
+    multiLine: true;
+    showGrid: boolean;
+    colors: string[];
+  }>;
 }
+
 
 const TrafficChartCard: React.FC<TrafficChartCardProps> = ({
   title,
