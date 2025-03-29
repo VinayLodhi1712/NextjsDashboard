@@ -4,7 +4,6 @@ export function generateSalesData() {
   // Generate data for line charts
   const generateLineData = (count: number) => {
     return Array.from({ length: count }).map((_, i) => ({
-      name: String.fromCharCode(65 + i),
       value: faker.number.int({ min: 10, max: 100 }),
     }))
   }
@@ -82,3 +81,38 @@ export function generateTransactionData() {
   }))
 }
 
+// dataUtils.js
+export function generateAnalyticsData() {
+  // Helper function to generate smooth line data that looks like the image
+  const generateSmoothLineData = (baseValue, volatility, trend) => {
+    const points = 7;
+    let currentValue = baseValue;
+    
+    return Array.from({ length: points }).map((_, i) => {
+      // Add some randomness with trend direction
+      const change = (Math.random() * volatility) * (trend === "up" ? 1 : -1);
+      currentValue = Math.max(5, currentValue + change + (trend === "up" ? 1 : -1));
+      return {
+        value: Math.round(currentValue),
+      };
+    });
+  };
+
+  // Generate data for each card with appropriate trends
+  return {
+    users: generateSmoothLineData(70, 10, "down"),
+    income: generateSmoothLineData(50, 15, "up"),
+    conversion: generateSmoothLineData(60, 8, "up"),
+    sessions: Array.from({ length: 7 }).map(() => ({
+      value: Math.floor(Math.random() * 90) + 10,
+    })),
+  };
+}
+
+export function generateBarChartData() {
+  // Generate data formatted for bar charts
+  return Array.from({ length: 7 }).map((_, i) => ({
+    name: String.fromCharCode(65 + i),
+    value: Math.floor(Math.random() * 90) + 10,
+  }));
+}
