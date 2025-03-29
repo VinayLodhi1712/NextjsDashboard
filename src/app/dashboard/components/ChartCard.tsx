@@ -4,8 +4,8 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 interface ChartCardProps {
   title: string;
   description: string;
-  data: any[];
-  ChartComponent: React.FC<any>;
+  data: { name: string; value1: number; value2: number; value3: number }[];
+  ChartComponent: React.FC<{ data: { name: string; value1: number; value2: number; value3: number }[]; colors?: string[] }>;
   colors?: string[];
 }
 

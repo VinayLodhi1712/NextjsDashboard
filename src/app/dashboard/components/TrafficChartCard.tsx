@@ -13,9 +13,9 @@ interface TrafficChartCardProps {
     value: number;
     color: string;
   }[];
-  trafficData: any[];
+  trafficData: { x: string | number; y: number }[];
   daysData: { day: string; percentage1: number; percentage2: number }[];
-  ChartComponent: React.FC<any>;
+  ChartComponent: React.FC<{ data: { x: string | number; y: number }[]; multiLine: boolean; showGrid: boolean; colors: string[] }>;
 }
 
 const TrafficChartCard: React.FC<TrafficChartCardProps> = ({

@@ -11,9 +11,15 @@ interface AnalyticsCardProps {
   percentage: string;
   trend: "up" | "down";
   bgColor: string;
-  data: any[];
-  ChartComponent: React.FC<any>;
+  data: { value: number }[];
+  ChartComponent: React.FC<{ 
+    data: { name: string; value: number }[]; // Define the expected structure of the data
+    colors: string[]; 
+    multiLine?: boolean; 
+    showGrid?: boolean; 
+  }>;
 }
+
 
 const AnalyticsCard: React.FC<AnalyticsCardProps> = ({
   title,
@@ -44,9 +50,6 @@ const AnalyticsCard: React.FC<AnalyticsCardProps> = ({
     name: index.toString(),
     value: item.value,
   }));
-
-  // Determine the color for trend
-  const trendColor = "text-white";
 
   return (
     <Card className={`${bgColor} text-white border-none overflow-hidden`}>
@@ -100,9 +103,7 @@ const AnalyticsCard: React.FC<AnalyticsCardProps> = ({
           {data?.length > 0 && (
             <SimpleLineChart 
               data={formattedData} 
-              trend={trend} 
               lineColor="rgba(255, 255, 255, 0.8)"
-              areaColor="rgba(255, 255, 255, 0.2)"
             />
           )}
         </div>
@@ -112,7 +113,7 @@ const AnalyticsCard: React.FC<AnalyticsCardProps> = ({
 };
 
 // Simple line chart component optimized for the card
-const SimpleLineChart = ({ data, lineColor }) => {
+const SimpleLineChart: React.FC<{ data: { name: string; value: number }[]; lineColor: string }> = ({ data, lineColor }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={data}>

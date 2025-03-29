@@ -40,7 +40,7 @@ const dummyData = [
 ];
 
 
-export function PieChartComponent({ percentage = 65, colors }) {
+export function PieChartComponent({ percentage = 65, colors }: { percentage?: number; colors?: string[] }) {
   
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -66,7 +66,7 @@ export function PieChartComponent({ percentage = 65, colors }) {
   );
 }
 
-export const AreaChartComponent = ({ data, colors }) => {
+export const AreaChartComponent = ({ data, colors }: { data: { name: string; [key: string]: number | string }[]; colors?: string[] }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart
@@ -99,7 +99,7 @@ export const AreaChartComponent = ({ data, colors }) => {
   );
 };
 // Custom tooltip that matches the image design
-export function ChartTooltip({ active, payload, label }) {
+export function ChartTooltip({ active, payload }: { active?: boolean; payload?: { name?: string; value?: number }[] }) {
   if (active && payload && payload.length) {
     return (
       <div className="bg-black/70 rounded-md px-3 py-2 text-xs text-white shadow">
@@ -114,7 +114,7 @@ export function ChartTooltip({ active, payload, label }) {
 }
 
 // Simple Line Chart optimized for analytics cards
-export function SimpleLineChart({ data, color = "#fff", height = 60 }) {
+export function SimpleLineChart({ data, color = "#fff", height = 60 }: { data: { value: number }[]; color?: string; height?: number }) {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <LineChart data={data}>
@@ -132,7 +132,7 @@ export function SimpleLineChart({ data, color = "#fff", height = 60 }) {
   );
 }
 // Updated LineChartComponent that supports multiple lines
-export function LineChartComponent({ data, colors, multiLine = false, showGrid = false }) {
+export function LineChartComponent({ data, colors, multiLine = false, showGrid = false }: { data: { name: string; [key: string]: number | string }[]; colors?: string[]; multiLine?: boolean; showGrid?: boolean }) {
   // If the data format is an array of { value } objects, transform for simple line chart
   if (!multiLine && data?.length > 0 && 'value' in data[0]) {
     const formattedData = data.map((item, index) => ({
@@ -224,7 +224,7 @@ export function LineChartComponent({ data, colors, multiLine = false, showGrid =
 }
 
 // Bar Chart Component that matches the image
-export function BarChartComponent({ data = dummyData, colors }) {
+export function BarChartComponent({ data = dummyData, colors }: { data?: typeof dummyData; colors?: string[] }) {
   console.log("Rendering BarChartComponent with data:", data);
   
   return (
@@ -241,7 +241,7 @@ export function BarChartComponent({ data = dummyData, colors }) {
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="name" stroke="#888" />
         <YAxis stroke="#888" />
-        <Tooltip content={<ChartTooltip active={undefined} payload={undefined} label={undefined} />} />
+        <Tooltip content={<ChartTooltip active={undefined} payload={undefined} />} />
         <Legend />
         {Object.keys(data[0])
           .filter(key => key !== 'name')

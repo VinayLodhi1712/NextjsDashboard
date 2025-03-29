@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker"
 export function generateSalesData() {
   // Generate data for line charts
   const generateLineData = (count: number) => {
-    return Array.from({ length: count }).map((_, i) => ({
+    return Array.from({ length: count }).map(() => ({
       value: faker.number.int({ min: 10, max: 100 }),
     }))
   }
@@ -84,11 +84,11 @@ export function generateTransactionData() {
 // dataUtils.js
 export function generateAnalyticsData() {
   // Helper function to generate smooth line data that looks like the image
-  const generateSmoothLineData = (baseValue, volatility, trend) => {
+  const generateSmoothLineData = (baseValue: number, volatility: number, trend: string) => {
     const points = 7;
     let currentValue = baseValue;
     
-    return Array.from({ length: points }).map((_, i) => {
+    return Array.from({ length: points }).map(() => {
       // Add some randomness with trend direction
       const change = (Math.random() * volatility) * (trend === "up" ? 1 : -1);
       currentValue = Math.max(5, currentValue + change + (trend === "up" ? 1 : -1));

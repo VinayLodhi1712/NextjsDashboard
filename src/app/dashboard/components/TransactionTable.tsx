@@ -11,7 +11,7 @@ import lila from "@/assets/profile/2.jpg";
 import jass from "@/assets/profile/3.jpg";
 
 const LatestTransactions = () => {
-  const [openMenuId, setOpenMenuId] = useState(null);
+  const [openMenuId, setOpenMenuId] = useState<string | null>(null);
 
   // Transaction data with customer images
   const transactions = [
@@ -67,7 +67,7 @@ const LatestTransactions = () => {
     },
   ];
 
-  const toggleMenu = (id) => {
+  const toggleMenu = (id: string | null) => {
     setOpenMenuId(openMenuId === id ? null : id);
   };
 

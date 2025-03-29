@@ -107,7 +107,15 @@ export default function DashboardPage() {
               trend="down"
               bgColor="bg-blue-600"
               data={salesData.users}
-              ChartComponent={LineChartComponent}
+              ChartComponent={(props) => (
+                <LineChartComponent
+                  {...props}
+                  data={props.data?.map((item) => ({
+                    ...item,
+                    name: item.name || "",
+                  }))}
+                />
+              )}
             />
             <AnalyticsCard
               title="Income"
@@ -134,7 +142,17 @@ export default function DashboardPage() {
               trend="down"
               bgColor="bg-red-500"
               data={salesData.sessions}
-              ChartComponent={BarChartComponent}
+              ChartComponent={(props) => (
+                <BarChartComponent
+                  {...props}
+                  data={props.data?.map((item) => ({
+                    ...item,
+                    value1: item.value,
+                    value2: 0,
+                    value3: 0,
+                  }))}
+                />
+              )}
             />
           </div>
 
@@ -143,15 +161,27 @@ export default function DashboardPage() {
             <ChartCard
               title="Area Chart representation"
               description="Orders in last 4-weeks"
-              data={revenueData.areaData}
-              ChartComponent={AreaChartComponent}
+              data={revenueData.areaData.map(item => ({
+                name: item.name,
+                value1: item.total,
+                value2: item.delivered,
+                value3: item.pending,
+              }))}
+              ChartComponent={(props) => (
+                <AreaChartComponent {...props} colors={props.colors || ["#0ea5e9", "#f59e0b", "#10b981"]} />
+              )}
               colors={["#0ea5e9", "#f59e0b", "#10b981"]}
             />
             <ChartCard
               title="Bar Chart representation"
               description="Orders in last 4-weeks"
               data={revenueData.barData}
-              ChartComponent={BarChartComponent}
+              ChartComponent={(props) => (
+                <BarChartComponent
+                  {...props}
+                  colors={props.colors || ["#0ea5e9", "#10b981", "#f59e0b"]}
+                />
+              )}
               colors={["#0ea5e9", "#10b981", "#f59e0b"]}
             />
           </div>

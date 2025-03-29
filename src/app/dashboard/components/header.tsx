@@ -289,7 +289,7 @@ const Header = () => {
                         {item.icon}
                         <span className="text-sm">{item.text}</span>
                       </div>
-                      {item.count && (
+                      {'count' in item && item.count && (
                         <span className={`flex h-5 min-w-5 items-center justify-center rounded px-1.5 text-xs font-semibold text-white ${item.color || 'bg-blue-500'}`}>
                           {item.count}
                         </span>
